@@ -39,5 +39,13 @@ public class EmployeeController {
             }
         });
 
+        EmployeeUI.bfavorite.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                EmployeeUI.getInputName();
+                ClientMessage.viewToClient("addFavorite,"+EmployeeUI.name+","+EmployeeUI.getEmployeeName());
+            }
+        });
+
     }
 }

@@ -23,6 +23,7 @@ public class Client {
     //Accounts
     //name      pass    type
     //steve 	123 	employee
+    //john  	123 	employee
     //dave      12      admin
 
 

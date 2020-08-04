@@ -4,13 +4,11 @@ import client.presentation.model.*;
 import server.business.AdminDAO;
 import server.business.EmployeeDAO;
 import server.business.LoginDAO;
-
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.time.Instant;
-import java.util.Random;
 
 class ConnectionServer extends Thread implements Observer {
     private final Socket clientSocket;
@@ -45,11 +43,9 @@ class ConnectionServer extends Thread implements Observer {
                     System.out.println(Instant.now() + " Got from client: " + msg);
 
                     String[] str = msg.split(",");
-                    Item i = new Item();
                     Movie m = new Movie();
-                    ItemRequest ir = new ItemRequest();
                     User u = new User();
-                    Bill b = new Bill();
+                    Favorite f = new Favorite();
                     switch (str[0]) {
                         case "loginCheck":
                             output.writeObject(LoginDAO.checkLoginDAO(str[1], str[2]));
@@ -73,6 +69,12 @@ class ConnectionServer extends Thread implements Observer {
                         case "searchStatus":
                             m.setStatus(str[1]);
                             output.writeObject(EmployeeDAO.searchMovieStatusDAO(m));
+                            break;
+
+                        case "addFavorite":
+                            f.setMovieName(str[1]);
+                            f.setUserName(str[2]);
+                            output.writeObject(EmployeeDAO.addFavoriteDAO(f));
                             break;
 
                         case "addUser":
@@ -127,18 +129,14 @@ class ConnectionServer extends Thread implements Observer {
                             output.writeObject(AdminDAO.viewMovieDAO(m));
                             break;
 
+                        case "changeStatus":
+                            m.setName(str[1]);
+                            m.setStatus(str[2]);
+                            output.writeObject(AdminDAO.changeStatusDAO(m));
+                            break;
+
                         case "report":
                             output.writeObject(AdminDAO.makeReportDAO(str[1], str[2], str[3]));
-                            break;
-
-
-                        case "viewRequests":
-                            output.writeObject(AdminDAO.viewRequestsDAO());
-                            break;
-
-                        case "adminGrantRequest":
-                            ir.setId(Integer.parseInt(str[1].trim()));
-                            output.writeObject(AdminDAO.grantRequestDAO(ir));
                             break;
 
 

@@ -1,6 +1,6 @@
 package server.business;
 
-import client.presentation.model.Item;
+import client.presentation.model.Favorite;
 import client.presentation.model.Movie;
 import server.data_source.EmployeeActions;
 
@@ -22,5 +22,7 @@ public class EmployeeDAO {
     public static String searchMovieStatusDAO(Movie m) {
         return EmployeeActions.searchMovieStatus(m);
     }
+
+    public static String addFavoriteDAO(Favorite f){ return EmployeeActions.addFavorite(f);}
 
 }

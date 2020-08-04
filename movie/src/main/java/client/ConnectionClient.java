@@ -66,6 +66,8 @@ public class ConnectionClient extends Thread {
 
                         case "searchGenre":
 
+                        case "addFavorite":
+
                         case "searchStatus":
                             EmployeeUI.showMessage(str[1]);
                             break;
@@ -85,6 +87,8 @@ public class ConnectionClient extends Thread {
                         case "updateMovie":
 
                         case "viewMovie":
+
+                        case "changeStatus":
 
                         case "report":
                             AdminUI.showMessage(str[1]);

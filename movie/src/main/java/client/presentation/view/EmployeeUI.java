@@ -14,6 +14,7 @@ public class EmployeeUI {
     private JPanel p5 = new JPanel();
     private JPanel p6 = new JPanel();
     private JPanel p7 = new JPanel();
+    private JPanel p8 = new JPanel();
     private JLabel l1 = new JLabel("Id");
     private JLabel l2 = new JLabel("Name");
     private JLabel l3 = new JLabel("Year");
@@ -29,6 +30,7 @@ public class EmployeeUI {
     public static JButton byear = new JButton("Year");
     public static JButton bgenre = new JButton("Genre");
     public static JButton bstatus = new JButton("Status");
+    public static JButton bfavorite = new JButton("Add to favorites");
 
     //CRUD stock
 
@@ -120,24 +122,27 @@ public class EmployeeUI {
         p3.add(t3);
         p4.add(l4);
         p4.add(t4);
-
+        p5.add(l5);
+        p5.add(t5);
 
         p6.add(l6);
         p6.add(bname);
         p6.add(byear);
         p6.add(bgenre);
         p6.add(bstatus);
-        p7.add(l5);
-        p7.add(t5);
+        p7.add(bfavorite);
+
+
+
 
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.add(p1);
         panel.add(p2);
         panel.add(p3);
         panel.add(p4);
-        panel.add(p7);
-        panel.add(p6);
         panel.add(p5);
+        panel.add(p6);
+        panel.add(p7);
 
         EmployeeController.EmployeeUIActionListeners();
 
@@ -156,7 +161,7 @@ public class EmployeeUI {
     }
 
     public static void main(String[] args){
-        EmployeeUI e = new EmployeeUI("");
+        EmployeeUI e = new EmployeeUI("steve");
     }
 }
 

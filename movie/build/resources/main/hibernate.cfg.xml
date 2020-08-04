@@ -17,6 +17,7 @@
 
         <mapping class="client.presentation.model.User"/>
         <mapping class="client.presentation.model.Movie"/>
+        <mapping class="client.presentation.model.Favorite"/>
 
 
     </session-factory>

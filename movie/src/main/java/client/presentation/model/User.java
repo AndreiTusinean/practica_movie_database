@@ -1,6 +1,7 @@
 package client.presentation.model;
 
 import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 
 @Entity
@@ -9,8 +10,8 @@ public class User {
 
     @Id
     @GeneratedValue(generator = "increment")
-    @GenericGenerator(name="increment",strategy = "increment")
-    @Column(name="ID")
+    @GenericGenerator(name = "increment", strategy = "increment")
+    @Column(name = "ID")
     private int id;
     @Column(name = "name")
     private String name;
@@ -52,15 +53,14 @@ public class User {
         this.type = type;
     }
 
-    public String toString() {
-        return id + " " + name + " " + pass + " " + type;
+    public String toString() { return "Account " + id + "with name: " + name + ", password: " + pass + " of " + type + " type"; }
+
+    public User(String name, String pass, String type) {
+        this.name = name;
+        this.pass = pass;
+        this.type = type;
     }
 
-    public User(String name,String pass,String type){
-        this.name=name;
-        this.pass=pass;
-        this.type=type;
+    public User() {
     }
-
-    public User(){}
 }

@@ -33,11 +33,10 @@ public class AdminUI {
     public static JButton update = new JButton("Update");
     public static JButton delete = new JButton("Delete");
     public static JButton view = new JButton("View");
-    public static JButton grant = new JButton("Grant request");
-    public static JButton viewRequests = new JButton("List Item Update Requests");
     public static JButton report = new JButton("Make report");
     public static JCheckBox jc1 = new JCheckBox("Pdf");
     public static JCheckBox jc2 = new JCheckBox("Txt");
+
 
     public static int id;
     public static String name, pass, type, movie, remarks;
@@ -131,8 +130,6 @@ public class AdminUI {
         p8.add(jc1);
         p8.add(jc2);
         p8.add(report);
-        p9.add(viewRequests);
-        p9.add(grant);
 
 
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));

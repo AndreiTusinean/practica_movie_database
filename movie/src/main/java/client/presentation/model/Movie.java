@@ -64,7 +64,7 @@ public class Movie {
     }
 
     public String toString() {
-        return id + " " + name + " " + year + " " + genre + " " + status;
+        return id +" " + name + " " + year + " " + genre + " " + status;
     }
 
     public Movie(String name, int year, String genre, String status) {
@@ -74,6 +74,7 @@ public class Movie {
         this.status = status;
     }
 
-    public Movie() {}
+    public Movie() {
+    }
 
 }

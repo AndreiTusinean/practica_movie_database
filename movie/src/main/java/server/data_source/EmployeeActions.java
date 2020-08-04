@@ -1,18 +1,14 @@
 package server.data_source;
 
-import client.presentation.model.Bill;
-import client.presentation.model.Item;
+import client.presentation.model.Favorite;
 import client.presentation.model.Movie;
-import client.presentation.model.Ranking;
 import org.hibernate.Query;
 import org.hibernate.Session;
-
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -116,6 +112,14 @@ public class EmployeeActions {
         return str;
     }
 
+    public static String addFavorite(Favorite f){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        session.save(f);
+        session.getTransaction().commit();
+        session.close();
+        return "addFavorite," + "Inserted favorite: " + f.toString();
+    }
     public static void sendMail(String subject, String content) {
         String to = "andrei.tusinean@gmail.com";
         String from = "andrei.tusinean@gmail.com";
@@ -146,39 +150,6 @@ public class EmployeeActions {
         }
     }
 
-    public static void addRanking(String name, int amount) {
-        int orders = 0;
-        int id = 0;
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
-        Query query = session.createQuery("from Ranking p where p.name='" + name + "'");
-        List<Ranking> rank1 = query.list();
-        for (Ranking j : rank1) {
-            if (j.getName().equals(name)) {
-                id = j.getId();
-                orders = j.getOrders() + 1;
-                amount += j.getTotalamount();
-            }
-        }
-        session.getTransaction().commit();
-        session.close();
-        Ranking r = new Ranking();
-        r.setId(id);
-        r.setName(name);
-        r.setOrders(orders);
-        r.setTotalamount(amount);
-
-        Session s = HibernateUtil.getSessionFactory().openSession();
-        s.beginTransaction();
-        s.update(r);
-        s.getTransaction().commit();
-        s.close();
-    }
-
-
-    public abstract static class MakeBill {
-
-    }
 
 
 }

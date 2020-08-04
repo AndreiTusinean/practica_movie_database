@@ -4,7 +4,6 @@ import client.ClientMessage;
 import client.presentation.model.User;
 import client.presentation.view.AdminMovieUI;
 import client.presentation.view.AdminUI;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -76,38 +75,6 @@ public class AdminController {
             }
         });
 
-        AdminMovieUI.create.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                AdminMovieUI.getInputs();
-                ClientMessage.viewToClient("addMovie," + AdminMovieUI.name + "," + AdminMovieUI.year + "," + AdminMovieUI.genre + "," + AdminMovieUI.status);
-            }
-        });
-
-        AdminMovieUI.update.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                AdminMovieUI.getInputs();
-                ClientMessage.viewToClient("updateMovie," + AdminMovieUI.id + "," + AdminMovieUI.name + "," + AdminMovieUI.year + "," + AdminMovieUI.genre + "," + AdminMovieUI.status);
-            }
-        });
-
-        AdminMovieUI.delete.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                AdminMovieUI.getInputId();
-                ClientMessage.viewToClient("removeMovie," + AdminMovieUI.id);
-            }
-        });
-
-        AdminMovieUI.view.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                AdminMovieUI.getInputId();
-                ClientMessage.viewToClient("viewMovie," + AdminMovieUI.id);
-            }
-        });
-
         AdminUI.report.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -116,19 +83,5 @@ public class AdminController {
             }
         });
 
-        AdminUI.viewRequests.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ClientMessage.viewToClient("viewRequests");
-            }
-        });
-
-        AdminUI.grant.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                AdminUI.getInputId();
-                ClientMessage.viewToClient("adminGrantRequest," + AdminUI.id);
-            }
-        });
     }
 }

@@ -1,5 +1,6 @@
 package client.presentation.view;
 
+import client.presentation.controller.AdminMovieController;
 import client.presentation.controller.EmployeeController;
 
 import javax.swing.*;
@@ -19,6 +20,7 @@ public class AdminMovieUI {
     private JLabel l3 = new JLabel("Year");
     private JLabel l4 = new JLabel("Genre");
     private JLabel l5 = new JLabel("Status");
+    private JLabel l6 = new JLabel("Set movie status to:");
     private static JTextField t1 = new JTextField("0");
     private static JTextField t2 = new JTextField("");
     private static JTextField t3 = new JTextField("");
@@ -28,11 +30,14 @@ public class AdminMovieUI {
     public static JButton update = new JButton("Update");
     public static JButton delete = new JButton("Delete");
     public static JButton view = new JButton("View");
+    public static JButton bstatus = new JButton("Change status");
 
-    //CRUD stock
+    static String[] statuses = {"to be released","released","cancelled","delayed"};
+    public static JComboBox jb = new JComboBox(statuses);
+    public static String status = "to be released";
 
     public static int id, year;
-    public static String name, genre, status;
+    public static String name, genre;
 
     public void setName(String n) {
         name = n;
@@ -44,6 +49,14 @@ public class AdminMovieUI {
 
     public void setId(int i) {
         id = i;
+    }
+
+    public static String getStatus() {
+        return status;
+    }
+
+    public static void setStatus(String status) {
+        AdminMovieUI.status = status;
     }
 
     public int getId() {
@@ -60,6 +73,10 @@ public class AdminMovieUI {
         } catch (NumberFormatException e) {
             showMessage("Incorrect inputs");
         }
+    }
+
+    public static void getInputMovie() {
+        name = t2.getText().trim();
     }
 
     public static void getInputId() {
@@ -92,24 +109,27 @@ public class AdminMovieUI {
         p3.add(t3);
         p4.add(l4);
         p4.add(t4);
+        p5.add(l5);
+        p5.add(t5);
 
         p6.add(create);
         p6.add(update);
         p6.add(delete);
         p6.add(view);
-        p7.add(l5);
-        p7.add(t5);
+        p7.add(l6);
+        p7.add(jb);
+        p7.add(bstatus);
 
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.add(p1);
         panel.add(p2);
         panel.add(p3);
         panel.add(p4);
-        panel.add(p7);
-        panel.add(p6);
         panel.add(p5);
+        panel.add(p6);
+        panel.add(p7);
 
-        EmployeeController.EmployeeUIActionListeners();
+        AdminMovieController.AdminMovieUIActionListeners();
 
         frame.add(panel);
         frame.pack();

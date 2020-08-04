@@ -1,6 +1,5 @@
 package server.business;
 
-import client.presentation.model.ItemRequest;
 import client.presentation.model.Movie;
 import client.presentation.model.User;
 import server.data_source.AdminActions;
@@ -37,7 +36,6 @@ public class AdminDAO {
 
     public static String makeReportDAO(String movie, String remarks, String type){ return AdminActions.makeReportDS(movie, remarks, type);}
 
-    public static String viewRequestsDAO(){return AdminActions.viewRequests();}
+    public static String changeStatusDAO(Movie m){ return AdminActions.changeStatus(m);}
 
-    public static String grantRequestDAO(ItemRequest i){return AdminActions.grantRequest(i);}
 }

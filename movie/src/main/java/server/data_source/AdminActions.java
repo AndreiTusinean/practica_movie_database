@@ -1,7 +1,5 @@
 package server.data_source;
 
-import client.presentation.model.Item;
-import client.presentation.model.ItemRequest;
 import client.presentation.model.Movie;
 import client.presentation.model.User;
 import org.hibernate.Query;
@@ -182,78 +180,38 @@ public class AdminActions {
         return str;
     }
 
-    public static String viewRequests() {
+    public static String changeStatus(Movie m) {
         String str = "";
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        Query query = session.createQuery("from ItemRequest");
-        List<ItemRequest> item1 = query.list();
-        if (item1.isEmpty()) {
-            str = "viewRequests,No requests found";
+        Query query = session.createQuery("from Movie p where p.name='" + m.getName() + "'");
+        List<Movie> movie1 = query.list();
+        if (movie1.isEmpty()) {
+            str = "changeStatus," + "No movie found with name " + m.getName();
         }
         StringBuilder msg = new StringBuilder("");
-        for (ItemRequest j : item1) {
-            msg.append(j.toString()).append("\n");
-        }
-        if (msg.length() == 0)
-            str = "viewRequests,No requests found";
-        else
-            str = "viewRequests," + msg.toString();
-        session.getTransaction().commit();
-        session.close();
-        return str;
-    }
-
-    public static String deleteRequest(ItemRequest i) {
-        String str = "";
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
-        Query query = session.createQuery("from ItemRequest p where p.id='" + i.getId() + "'");
-        List<ItemRequest> item1 = query.list();
-        if (item1.isEmpty())
-            str = "No item found with id " + i.getId();
-        else
-            str = "Deleted ItemRequest " + i.getId();
-        for (ItemRequest j : item1) {
-            if (j.getId() == i.getId()) {
-                session.delete(j);
-                session.getTransaction().commit();
-            }
-        }
-        session.close();
-        return str;
-    }
-
-    public static String grantRequest(ItemRequest i) {
-        String str = "";
-        Item it = new Item();
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
-        Query query = session.createQuery("from ItemRequest p where p.id='" + i.getId() + "'");
-        List<ItemRequest> item1 = query.list();
-        if (item1.isEmpty()) {
-            str="adminGrantRequest,"+"No ItemRequest found with id " + i.getId();
-        }
-        StringBuilder msg = new StringBuilder("");
-        for (ItemRequest j : item1) {
-            if (j.getId() == i.getId()) {
+        for (Movie j : movie1) {
+            if (j.getName().equals(m.getName())) {
+                m.setGenre(j.getGenre());
+                m.setYear(j.getYear());
+                m.setId(j.getId());
                 msg.append(j.toString()).append("\n");
-                it.setId(j.getId());
-                it.setAmount(j.getAmount());
-                it.setLocation(j.getLocation());
-                it.setName(j.getName());
-                it.setPrice(j.getPrice());
             }
         }
         if (msg.length() == 0)
-            str="adminGrantRequest,"+"No ItemRequest found with id " + i.getId();
-        else
-            str="adminGrantRequest,"+msg.toString();
+            str = "changeStatus," + "No movie found with name " + m.getName();
+        else {
+            str = "changeStatus," + "Changed status of movie " + m.getName() + " to " + m.getStatus();
+            Movie m1 = new Movie(m.getName(),m.getYear(),m.getGenre(),m.getStatus());
+            m1.setId(m.getId());
+            Session s = HibernateUtil.getSessionFactory().openSession();
+            s.beginTransaction();
+            s.update(m);
+            s.getTransaction().commit();
+            s.close();
+        }
         session.getTransaction().commit();
         session.close();
-
-        //EmployeeActions.updateItem(it);
-        str+=deleteRequest(i);
         return str;
     }
 
