@@ -78,6 +78,7 @@ public class LoginUI extends JFrame{
         frame.setTitle("Warehouse login");
         frame.setVisible(true);
         frame.setSize(400, 500);
+        setContentPane(new JLabel(new ImageIcon("D:\\Work\\movie\\loginImg.jpg")));
     }
     int LoginIndex;
     public LoginUI(int LoginIndex){

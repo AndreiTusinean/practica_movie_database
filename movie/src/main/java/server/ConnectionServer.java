@@ -4,6 +4,7 @@ import client.presentation.model.*;
 import server.business.AdminDAO;
 import server.business.EmployeeDAO;
 import server.business.LoginDAO;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -133,6 +134,7 @@ class ConnectionServer extends Thread implements Observer {
                             m.setName(str[1]);
                             m.setStatus(str[2]);
                             output.writeObject(AdminDAO.changeStatusDAO(m));
+                            Server.notifyAll(Integer.parseInt(str[5].trim()), str[1] + "'s new status is " + str[2]);
                             break;
 
                         case "report":
