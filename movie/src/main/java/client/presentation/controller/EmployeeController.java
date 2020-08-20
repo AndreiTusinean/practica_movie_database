@@ -47,5 +47,11 @@ public class EmployeeController {
             }
         });
 
+        EmployeeUI.bmail.addActionListener(e -> {
+            EmployeeUI.getInputMail();
+            ClientMessage.viewToClient("sendMail,"+EmployeeUI.subject+","+EmployeeUI.content);
+        });
+
+
     }
 }

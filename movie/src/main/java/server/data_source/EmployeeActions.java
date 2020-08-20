@@ -4,6 +4,7 @@ import client.presentation.model.Favorite;
 import client.presentation.model.Movie;
 import org.hibernate.Query;
 import org.hibernate.Session;
+
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Transport;
@@ -112,7 +113,7 @@ public class EmployeeActions {
         return str;
     }
 
-    public static String addFavorite(Favorite f){
+    public static String addFavorite(Favorite f) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         session.save(f);
@@ -120,7 +121,9 @@ public class EmployeeActions {
         session.close();
         return "addFavorite," + "Inserted favorite: " + f.toString();
     }
-    public static void sendMail(String subject, String content) {
+
+    public static String sendMail(String subject, String content) {
+        String str = "";
         String to = "andrei.tusinean@gmail.com";
         String from = "andrei.tusinean@gmail.com";
         String host = "smtp.gmail.com";//""localhost";
@@ -144,12 +147,13 @@ public class EmployeeActions {
             message.setSubject(subject);
             message.setText(content);
             Transport.send(message, mail, pass);
-            System.out.println("Sent message successfully....");
+            str = "sendMail,Mail was sent to admin";
         } catch (MessagingException mex) {
-            mex.printStackTrace();
+            //mex.printStackTrace();
+            str = "sendMail,Mail was not sent";
         }
+        return str;
     }
-
 
 
 }

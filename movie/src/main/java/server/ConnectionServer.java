@@ -78,6 +78,10 @@ class ConnectionServer extends Thread implements Observer {
                             output.writeObject(EmployeeDAO.addFavoriteDAO(f));
                             break;
 
+                        case "sendMail":
+                            output.writeObject(EmployeeDAO.sendMailDAO(str[1],str[2]));
+                            break;
+
                         case "addUser":
                             u.setName(str[1]);
                             u.setPass(str[2]);

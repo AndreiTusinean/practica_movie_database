@@ -69,6 +69,8 @@ public class ConnectionClient extends Thread {
                         case "addFavorite":
 
                         case "searchStatus":
+
+                        case "sendMail":
                             EmployeeUI.showMessage(str[1]);
                             break;
 

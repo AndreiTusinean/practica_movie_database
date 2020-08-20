@@ -15,27 +15,33 @@ public class EmployeeUI {
     private JPanel p6 = new JPanel();
     private JPanel p7 = new JPanel();
     private JPanel p8 = new JPanel();
+    private JPanel p9 = new JPanel();
     private JLabel l1 = new JLabel("Id");
     private JLabel l2 = new JLabel("Name");
     private JLabel l3 = new JLabel("Year");
     private JLabel l4 = new JLabel("Genre");
     private JLabel l5 = new JLabel("Status");
     private JLabel l6 = new JLabel("Search by:");
+    private JLabel l7 = new JLabel("Subject:");
+    private JLabel l8 = new JLabel("Content:");
+    private static JTextArea jt = new JTextArea("");
     private static JTextField t1 = new JTextField("0");
     private static JTextField t2 = new JTextField("");
     private static JTextField t3 = new JTextField("");
     private static JTextField t4 = new JTextField("");
     private static JTextField t5 = new JTextField("");
+    private static JTextField t6 = new JTextField("");
     public static JButton bname = new JButton("Name");
     public static JButton byear = new JButton("Year");
     public static JButton bgenre = new JButton("Genre");
     public static JButton bstatus = new JButton("Status");
     public static JButton bfavorite = new JButton("Add to favorites");
+    public static JButton bmail = new JButton("Send mail");
 
     //CRUD stock
 
     public static int id, year;
-    public static String name, genre, status;
+    public static String name, genre, status, subject, content;
     static String employeeName;
 
     public void setName(String n) {
@@ -97,7 +103,9 @@ public class EmployeeUI {
         }
     }
 
-    public static void getInputDiscount() {
+    public static void getInputMail() {
+        subject = t6.getText().trim();
+        content = jt.getText().trim();
     }
 
     public static void showMessage(String msg) {
@@ -113,6 +121,8 @@ public class EmployeeUI {
         t3.setColumns(15);
         t4.setColumns(15);
         t5.setColumns(15);
+        t6.setColumns(15);
+        jt.setColumns(15);
 
         p1.add(l1);
         p1.add(t1);
@@ -132,7 +142,12 @@ public class EmployeeUI {
         p6.add(bstatus);
         p7.add(bfavorite);
 
+        p8.add(l7);
+        p8.add(t6);
 
+        p9.add(l8);
+        p9.add(jt);
+        p9.add(bmail);
 
 
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -143,6 +158,8 @@ public class EmployeeUI {
         panel.add(p5);
         panel.add(p6);
         panel.add(p7);
+        panel.add(p8);
+        panel.add(p9);
 
         EmployeeController.EmployeeUIActionListeners();
 
@@ -151,7 +168,7 @@ public class EmployeeUI {
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
-        frame.setSize(430, 300);
+        frame.setSize(450, 400);
         frame.setTitle("Employee operations");
     }
 

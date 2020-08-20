@@ -23,6 +23,8 @@ public class EmployeeDAO {
         return EmployeeActions.searchMovieStatus(m);
     }
 
-    public static String addFavoriteDAO(Favorite f){ return EmployeeActions.addFavorite(f);}
+    public static String addFavoriteDAO(Favorite f) { return EmployeeActions.addFavorite(f); }
+
+    public static String sendMailDAO(String s, String c) { return EmployeeActions.sendMail(s,c);}
 
 }
